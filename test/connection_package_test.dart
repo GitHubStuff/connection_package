@@ -6,14 +6,16 @@ import 'package:mockito/mockito.dart';
 
 import 'package:connection_package/network/network_status.dart';
 
-class MockNetwork extends Mock implements TestNetwork {}
+class MockNetwork extends Mock implements TestNetwork {
+  MockNetwork(ConnectionBloc bloc);
+}
 
 void main() {
   MockNetwork mockNetwork;
   ConnectionBloc connectionBloc;
 
   setUp(() {
-    mockNetwork = MockNetwork();
+    mockNetwork = MockNetwork(null);
     connectionBloc = ConnectionBloc(networkStatus: mockNetwork);
   });
 
@@ -38,15 +40,23 @@ void main() {
       ConnectionInitialState(),
       ConnectedWifiState(),
     ];
-    debugPrint('Trace');
     expectLater(
       connectionBloc,
       emitsInOrder(expectedResponse),
-    ).then((item) {
-      debugPrint('Finished');
-    });
+    );
 
     connectionBloc.add(ConnectionChangedEvent(ConnectivityResult.wifi));
-    debugPrint('done....');
+  });
+
+  test('Network reported change to "wifi"', () {
+    final expectedResponse = [
+      ConnectionInitialState(),
+      ConnectedWifiState(),
+    ];
+    expectLater(
+      connectionBloc,
+      emitsInOrder(expectedResponse),
+    );
+    mockNetwork.onChange(ConnectivityResult.wifi);
   });
 }

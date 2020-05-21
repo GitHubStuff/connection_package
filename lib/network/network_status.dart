@@ -8,20 +8,12 @@ abstract class NetworkStatus {
   static ConnectivityResult currentState = ConnectivityResult.none;
 
   final ConnectionBloc _connectionBloc;
-  
+
   NetworkStatus(ConnectionBloc connectionBloc) : _connectionBloc = connectionBloc;
-
-  void close() {
-    _connectionBloc.close();
-  }
-
-  void cancel(StreamSubscription<ConnectivityResult> subscription) {
-    subscription?.cancel();
-  }
 
   void onChange(ConnectivityResult result) {
     NetworkStatus.currentState = result;
-    _connectionBloc.mapNetworkEventToState(result);
+    _connectionBloc.add(ConnectionChangedEvent(result));
   }
 
   StreamSubscription<ConnectivityResult> listen(
