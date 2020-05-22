@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:connection_package/network/network_status.dart';
 
 class MockNetwork extends Mock implements LiveNetwork {
-  MockNetwork(ConnectionBloc bloc);
+  MockNetwork(ConnectionBloc bloc) : super();
 }
 
 void main() {
@@ -14,8 +14,8 @@ void main() {
   ConnectionBloc connectionBloc;
 
   setUp(() {
-    mockNetwork = MockNetwork(null);
     connectionBloc = ConnectionBloc();
+    mockNetwork = MockNetwork(connectionBloc);
   });
 
   tearDown(() {
@@ -47,7 +47,7 @@ void main() {
     connectionBloc.add(ConnectionChangedEvent(ConnectivityResult.wifi));
   });
 
-  test('Network reported change to "wifi"', () {
+  test('Network reported change to "wifi"', () async {
     final expectedResponse = [
       ConnectionInitialState(),
       ConnectedWifiState(),
@@ -56,6 +56,7 @@ void main() {
       connectionBloc,
       emitsInOrder(expectedResponse),
     );
-    mockNetwork.onChange(ConnectivityResult.wifi);
+    final network = TestNetwork(connectionBloc, connectivityResult: ConnectivityResult.wifi);
+    network.onChange(ConnectivityResult.wifi);
   });
 }
