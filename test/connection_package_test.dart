@@ -1,12 +1,11 @@
 import 'package:connection_package/bloc/connection_bloc.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:connection_package/network/network_status.dart';
 
-class MockNetwork extends Mock implements TestNetwork {
+class MockNetwork extends Mock implements LiveNetwork {
   MockNetwork(ConnectionBloc bloc);
 }
 
@@ -16,7 +15,7 @@ void main() {
 
   setUp(() {
     mockNetwork = MockNetwork(null);
-    connectionBloc = ConnectionBloc(networkStatus: mockNetwork);
+    connectionBloc = ConnectionBloc();
   });
 
   tearDown(() {
