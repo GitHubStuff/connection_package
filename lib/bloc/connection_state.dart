@@ -8,6 +8,7 @@ abstract class ConnectionState extends Equatable {
 class ConnectedCelluarState extends ConnectionState {
   const ConnectedCelluarState();
 }
+
 class ConnectedWifiState extends ConnectionState {
   const ConnectedWifiState();
 }
@@ -23,5 +24,3 @@ class ConnectionLostState extends ConnectionState {
 class ConnectionUnknownState extends ConnectionState {
   const ConnectionUnknownState();
 }
-
-
