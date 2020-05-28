@@ -28,13 +28,14 @@ abstract class NetworkStatus {
     _connectionBloc.add(ConnectionChangedEvent(result));
   }
 }
-
+// MARK:
 class LiveNetwork extends NetworkStatus {
   LiveNetwork({@required ConnectionBloc connectionBloc}) : super(connectionBloc);
 }
 
+// MARK:
 class TestNetwork extends NetworkStatus {
-  final ConnectivityResult _connectivityResult;
+  ConnectivityResult _connectivityResult;
   TestNetwork(ConnectionBloc connectionBloc, {@required ConnectivityResult connectivityResult})
       : _connectivityResult = connectivityResult,
         super(connectionBloc);
@@ -43,6 +44,7 @@ class TestNetwork extends NetworkStatus {
   void onChange(ConnectivityResult connectivity, [Duration delay = const Duration(milliseconds: 500)]) {
     Duration wait = delay ?? Duration(microseconds: 100);
     Future.delayed(wait, () {
+      _connectivityResult = connectivity;
       super.onChange(connectivity);
     });
   }

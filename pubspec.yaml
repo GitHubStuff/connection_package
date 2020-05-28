@@ -1,6 +1,6 @@
 name: connection_package
 description: A new Flutter package project.
-version: 0.0.1+1
+version: 0.0.2+0
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -20,6 +20,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^4.1.1
-  test: any
+  test: ">=1.14.0 <2.0.0 "
 
 flutter:
