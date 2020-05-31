@@ -1,4 +1,5 @@
-part of 'connection_bloc.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class ConnectionEvent extends Equatable {
   const ConnectionEvent();

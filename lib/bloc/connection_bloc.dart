@@ -1,14 +1,10 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:equatable/equatable.dart';
-
 import '../connection_package.dart';
 
-part 'connection_event.dart';
 
-class ConnectionBloc extends Bloc<ConnectionBloc, ConnectionState> {
+class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   @override
   ConnectionState get initialState => ConnectionInitialState();
 
