@@ -8,7 +8,7 @@ import '../connection_package.dart';
 
 part 'connection_event.dart';
 
-class ConnectionBloc extends Bloc<dynamic, ConnectionState> {
+class ConnectionBloc extends Bloc<ConnectionBloc, ConnectionState> {
   @override
   ConnectionState get initialState => ConnectionInitialState();
 
