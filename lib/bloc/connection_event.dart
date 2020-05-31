@@ -1,5 +1,6 @@
-import 'package:connectivity/connectivity.dart';
 import 'package:equatable/equatable.dart';
+
+import '../connection_package.dart';
 
 abstract class ConnectionEvent extends Equatable {
   const ConnectionEvent();
@@ -7,7 +8,7 @@ abstract class ConnectionEvent extends Equatable {
 }
 
 class ConnectionChangedEvent extends ConnectionEvent {
-  final ConnectivityResult type;
+  final NetworkConnectionType type;
   const ConnectionChangedEvent(this.type);
   @override
   List<Object> get props => [type];

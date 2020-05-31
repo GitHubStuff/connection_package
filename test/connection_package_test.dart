@@ -1,5 +1,6 @@
 import 'package:connection_package/bloc/connection_bloc.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connection_package/bloc/connection_state.dart';
+import 'package:connection_package/connection_package.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -44,7 +45,7 @@ void main() {
       emitsInOrder(expectedResponse),
     );
 
-    connectionBloc.add(ConnectionChangedEvent(ConnectivityResult.wifi));
+    connectionBloc.add(ConnectionChangedEvent(NetworkConnectionType.WiFi));
   });
 
   test('Network reported change to "wifi"', () async {
@@ -56,7 +57,7 @@ void main() {
       connectionBloc,
       emitsInOrder(expectedResponse),
     );
-    final network = TestNetwork(connectionBloc, connectivityResult: ConnectivityResult.wifi);
-    network.onChange(ConnectivityResult.wifi);
+    final network = TestNetwork(connectionBloc, connectivityResult: NetworkConnectionType.WiFi);
+    network.onChange(NetworkConnectionType.WiFi);
   });
 }

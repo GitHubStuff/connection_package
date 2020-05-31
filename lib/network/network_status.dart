@@ -11,9 +11,24 @@ abstract class NetworkStatus {
   final ConnectionBloc _connectionBloc;
   StreamSubscription<ConnectivityResult> _subscription;
 
-  NetworkStatus(ConnectionBloc connectionBloc) : _connectionBloc = connectionBloc;
+  NetworkStatus(ConnectionBloc connectionBloc) : _connectionBloc = connectionBloc {
+    currentStatus().then((networkConnectionType) {
+      onChange(networkConnectionType);
+    });
+  }
 
-  Future<ConnectivityResult> currentStatus() async => await (Connectivity().checkConnectivity());
+  Future<NetworkConnectionType> currentStatus() async {
+    final status = await (Connectivity().checkConnectivity());
+    switch (status) {
+      case ConnectivityResult.mobile:
+        return NetworkConnectionType.Cellular;
+      case ConnectivityResult.none:
+        return NetworkConnectionType.None;
+      case ConnectivityResult.wifi:
+        return NetworkConnectionType.WiFi;
+    }
+    throw Exception('Unknown status ${status.toString()}');
+  }
 
   void close() {
     _subscription?.cancel();
@@ -23,14 +38,25 @@ abstract class NetworkStatus {
   void listen() {
     if (_subscription != null) return;
     _subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      onChange(result);
+      switch (result) {
+        case ConnectivityResult.mobile:
+          onChange(NetworkConnectionType.Cellular);
+          break;
+        case ConnectivityResult.none:
+          onChange(NetworkConnectionType.None);
+          break;
+        case ConnectivityResult.wifi:
+          onChange(NetworkConnectionType.WiFi);
+          break;
+      }
     });
   }
 
-  void onChange(ConnectivityResult result) {
+  void onChange(NetworkConnectionType result) {
     _connectionBloc.add(ConnectionChangedEvent(result));
   }
 }
+
 // MARK:
 class LiveNetwork extends NetworkStatus {
   LiveNetwork({@required ConnectionBloc connectionBloc}) : super(connectionBloc);
@@ -38,13 +64,13 @@ class LiveNetwork extends NetworkStatus {
 
 // MARK:
 class TestNetwork extends NetworkStatus {
-  ConnectivityResult _connectivityResult;
-  TestNetwork(ConnectionBloc connectionBloc, {@required ConnectivityResult connectivityResult})
+  NetworkConnectionType _connectivityResult;
+  TestNetwork(ConnectionBloc connectionBloc, {@required NetworkConnectionType connectivityResult})
       : _connectivityResult = connectivityResult,
         super(connectionBloc);
 
   @override
-  void onChange(ConnectivityResult connectivity, [Duration delay = const Duration(milliseconds: 500)]) {
+  void onChange(NetworkConnectionType connectivity, [Duration delay = const Duration(milliseconds: 500)]) {
     Duration wait = delay ?? Duration(microseconds: 100);
     Future.delayed(wait, () {
       _connectivityResult = connectivity;
@@ -53,7 +79,7 @@ class TestNetwork extends NetworkStatus {
   }
 
   @override
-  Future<ConnectivityResult> currentStatus() async => Future.delayed(Duration(milliseconds: 600), () {
+  Future<NetworkConnectionType> currentStatus() async => Future.delayed(Duration(milliseconds: 600), () {
         return _connectivityResult;
       });
 

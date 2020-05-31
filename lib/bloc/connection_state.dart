@@ -11,18 +11,14 @@ class ConnectedCelluarState extends ConnectionState {
   const ConnectedCelluarState();
 }
 
-class ConnectedWifiState extends ConnectionState {
-  const ConnectedWifiState();
-}
-
 class ConnectionInitialState extends ConnectionState {
   const ConnectionInitialState();
 }
 
-class ConnectionLostState extends ConnectionState {
-  const ConnectionLostState();
+class ConnectedWifiState extends ConnectionState {
+  const ConnectedWifiState();
 }
 
-class ConnectionUnknownState extends ConnectionState {
-  const ConnectionUnknownState();
+class NoConnectionState extends ConnectionState {
+  const NoConnectionState();
 }
