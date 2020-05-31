@@ -4,6 +4,9 @@ import 'package:connection_package/bloc/connection_bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
+import '../bloc/connection_bloc.dart';
+import '../connection_package.dart';
+
 abstract class NetworkStatus {
   final ConnectionBloc _connectionBloc;
   StreamSubscription<ConnectivityResult> _subscription;

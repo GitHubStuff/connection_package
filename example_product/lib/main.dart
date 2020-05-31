@@ -1,5 +1,6 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:connection_package/bloc/connection_bloc.dart';
+import 'package:connection_package/connection_package.dart';
 import 'package:connection_package/network/network_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
