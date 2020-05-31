@@ -12,13 +12,18 @@ abstract class NetworkStatus {
   StreamSubscription<ConnectivityResult> _subscription;
 
   NetworkStatus(ConnectionBloc connectionBloc) : _connectionBloc = connectionBloc {
-    currentStatus().then((networkConnectionType) {
+    //iOS doesn't get an initial network status, so one is force polled
+    connectionType().then((networkConnectionType) {
       onChange(networkConnectionType);
     });
   }
 
-  Future<NetworkConnectionType> currentStatus() async {
+  Future<NetworkConnectionType> connectionType() async {
     final status = await (Connectivity().checkConnectivity());
+    return _mapToAppNetworkStatus(status);
+  }
+
+  NetworkConnectionType _mapToAppNetworkStatus(ConnectivityResult status) {
     switch (status) {
       case ConnectivityResult.mobile:
         return NetworkConnectionType.Cellular;
@@ -37,18 +42,9 @@ abstract class NetworkStatus {
 
   void listen() {
     if (_subscription != null) return;
-    _subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      switch (result) {
-        case ConnectivityResult.mobile:
-          onChange(NetworkConnectionType.Cellular);
-          break;
-        case ConnectivityResult.none:
-          onChange(NetworkConnectionType.None);
-          break;
-        case ConnectivityResult.wifi:
-          onChange(NetworkConnectionType.WiFi);
-          break;
-      }
+    _subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult connectivityResult) {
+      final result = _mapToAppNetworkStatus(connectivityResult);
+      onChange(result);
     });
   }
 
@@ -79,7 +75,7 @@ class TestNetwork extends NetworkStatus {
   }
 
   @override
-  Future<NetworkConnectionType> currentStatus() async => Future.delayed(Duration(milliseconds: 600), () {
+  Future<NetworkConnectionType> connectionType() async => Future.delayed(Duration(milliseconds: 600), () {
         return _connectivityResult;
       });
 

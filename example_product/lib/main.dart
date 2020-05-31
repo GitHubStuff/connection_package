@@ -64,7 +64,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
   @override
   void afterFirstLayout(BuildContext context) {
     Log.t('zerky afterFirstLayout()');
-    _liveNetwork.currentStatus().then((value) {
+    _liveNetwork.connectionType().then((value) {
       if (value.toString() != buttonText) {
         setState(() {
           buttonText = value.toString();
@@ -170,7 +170,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
               RaisedButton(
                 child: Text('$buttonText', style: Theme.of(context).textTheme.headline5),
                 onPressed: () {
-                  _liveNetwork.currentStatus().then((value) {
+                  _liveNetwork.connectionType().then((value) {
                     if (value.toString() != buttonText) {
                       setState(() {
                         buttonText = value.toString();
