@@ -79,7 +79,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.2+4"
+    version: "0.0.3+2"
   connectivity:
     dependency: transitive
     description:
@@ -128,7 +128,7 @@ packages:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -147,16 +147,16 @@ packages:
       name: flutter_modular
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.3"
+    version: "1.2.5+1"
   flutter_project_package:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "30c534a23359ab49a93cc098c2d794857a194315"
+      resolved-ref: "9a3c19fe2db8e8dcaa981b38f768556464eea551"
       url: "https://github.com/GitHubStuff/flutter_project_package.git"
     source: git
-    version: "0.3.0+1"
+    version: "0.4.0+0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
