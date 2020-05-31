@@ -8,12 +8,12 @@ import '../connection_package.dart';
 
 part 'connection_event.dart';
 
-class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
+class ConnectionBloc extends Bloc<dynamic, ConnectionState> {
   @override
   ConnectionState get initialState => ConnectionInitialState();
 
   @override
-  Stream<ConnectionState> mapEventToState(ConnectionEvent event) async* {
+  Stream<ConnectionState> mapEventToState(dynamic event) async* {
     if (event is ConnectionChangedEvent) {
       yield* mapNetworkEventToState(event.type);
     }
