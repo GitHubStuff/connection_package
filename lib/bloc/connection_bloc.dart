@@ -4,8 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:equatable/equatable.dart';
 
+import '../connection_package.dart';
+
 part 'connection_event.dart';
-part 'connection_state.dart';
 
 class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   @override
