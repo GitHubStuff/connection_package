@@ -13,3 +13,10 @@ class ConnectionChangedEvent extends ConnectionEvent {
   @override
   List<Object> get props => [type];
 }
+
+class DataAccessEvent extends ConnectionEvent {
+  final bool connected;
+  const DataAccessEvent(this.connected);
+  @override
+  List<Object> get props => [connected];
+}

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:connection_package/bloc/connection_bloc.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/connection_bloc.dart';
@@ -21,6 +22,10 @@ abstract class NetworkStatus {
   Future<NetworkConnectionType> connectionType() async {
     final status = await (Connectivity().checkConnectivity());
     return _mapToAppNetworkStatus(status);
+  }
+
+  Future<bool> dataConnection({bool mock}) async {
+    return mock ?? await DataConnectionChecker().hasConnection;
   }
 
   NetworkConnectionType _mapToAppNetworkStatus(ConnectivityResult status) {
@@ -49,7 +54,13 @@ abstract class NetworkStatus {
   }
 
   void onChange(NetworkConnectionType result) {
+    onConnectioned();
     _connectionBloc.add(ConnectionChangedEvent(result));
+  }
+
+  Future<void> onConnectioned() async {
+    bool connected = await dataConnection();
+    _connectionBloc.add(DataAccessEvent(connected));
   }
 }
 
