@@ -10,6 +10,8 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   Stream<ConnectionState> mapEventToState(dynamic event) async* {
     if (event is ConnectionChangedEvent) {
       yield* mapNetworkEventToState(event.type);
+    } else if (event is DataAccessEvent) {
+      yield DataAccessState(event.connected);
     }
   }
 

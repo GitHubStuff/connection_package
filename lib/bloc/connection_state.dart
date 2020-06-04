@@ -19,6 +19,13 @@ class ConnectedWifiState extends ConnectionState {
   const ConnectedWifiState();
 }
 
+class DataAccessState extends ConnectionState {
+  final bool connected;
+  const DataAccessState(this.connected);
+  @override
+  List<Object> get props => [connected];
+}
+
 class NoConnectionState extends ConnectionState {
   const NoConnectionState();
 }
