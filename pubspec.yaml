@@ -1,6 +1,7 @@
 name: connection_package
 description: A new Flutter package project.
-version: 0.0.4+3
+version: 0.0.4+4
+homepage: https://github.com/GitHubStuff/connection_package.git
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
