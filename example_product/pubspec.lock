@@ -79,7 +79,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.0.3+3"
+    version: "0.0.4+1"
   connectivity:
     dependency: transitive
     description:
@@ -319,6 +319,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.15"
+  tracers:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: b751d0dd654628ade4a9d387af596f42b267aeb7
+      url: "https://github.com/GitHubStuff/tracers.git"
+    source: git
+    version: "0.9.0+0"
   typed_data:
     dependency: transitive
     description:
