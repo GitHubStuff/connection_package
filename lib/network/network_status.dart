@@ -14,7 +14,7 @@ abstract class NetworkStatus {
   StreamSubscription<ConnectivityResult> _subscription;
 
   NetworkStatus(ConnectionBloc connectionBloc) : _connectionBloc = connectionBloc {
-    //iOS doesn't get an initial network status, so one is force polled
+    //iOS doesn't get an initial network status, so this wil "force poll" to get connection state
     connectionType().then((networkConnectionType) {
       onChange(networkConnectionType);
     });
