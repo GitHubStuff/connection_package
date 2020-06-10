@@ -20,10 +20,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "694ccaecd0c0639e4a121c846bc654c5852c954c"
+      resolved-ref: d1f1e46fc3aebe33eba2018a138834b2114100ac
       url: "https://github.com/GitHubStuff/app_exception.git"
     source: git
-    version: "0.0.4"
+    version: "0.0.4+1"
   archive:
     dependency: transitive
     description:
@@ -215,7 +215,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.1+1"
+    version: "0.6.2"
   logging:
     dependency: transitive
     description:
@@ -285,7 +285,7 @@ packages:
       name: node_preamble
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.10"
+    version: "1.4.12"
   package_config:
     dependency: transitive
     description:
@@ -457,10 +457,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b751d0dd654628ade4a9d387af596f42b267aeb7
+      resolved-ref: "6e87420f5f443fa6feb7710d3c6b261d24746a1b"
       url: "https://github.com/GitHubStuff/tracers.git"
     source: git
-    version: "0.9.0+0"
+    version: "0.10.0+1"
   typed_data:
     dependency: transitive
     description:
@@ -481,7 +481,7 @@ packages:
       name: vm_service
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.4"
+    version: "4.1.0"
   watcher:
     dependency: transitive
     description:

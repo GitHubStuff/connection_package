@@ -7,6 +7,7 @@ export 'network/network_status.dart';
 
 enum NetworkConnectionType {
   Cellular,
+  Internet,
   None,
   WiFi,
 }
