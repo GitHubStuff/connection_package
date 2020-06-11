@@ -11,6 +11,7 @@ import 'package:tracers/tracers.dart' as Log;
 /// to call 'close()' to close the stream in the Widget class's 'void dispose()'
 ///
 abstract class BroadcastStream<T> {
+  StreamSubscription<ConnectivityResult> _subscription;
   final StreamController<T> _streamController = StreamController<T>.broadcast();
   Stream<T> get stream => _streamController.stream;
   Sink<T> get sink => _streamController.sink;
@@ -28,7 +29,6 @@ abstract class NetworkConnectionMonitorStream extends BroadcastStream<NetworkCon
     });
   }
 
-  @override
   void dispose() {
     super.close();
   }
@@ -37,6 +37,26 @@ abstract class NetworkConnectionMonitorStream extends BroadcastStream<NetworkCon
     final status = await (Connectivity().checkConnectivity());
     Log.p('{network_status.dart} connectionType {status: $status}');
     return _convertConnectivityToNetworkConnectionType(status);
+  }
+
+  void onChange(NetworkConnectionType result) async {
+    await onConnectioned();
+    sink.add(result);
+  }
+
+  void close() {
+    _subscription?.cancel();
+    _subscription = null;
+  }
+
+  void listen() {
+    if (_subscription != null) return;
+    Log.p('{network_connect_monitor.dart} ..Listening');
+    _subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult connectivityResult) {
+      final result = _convertConnectivityToNetworkConnectionType(connectivityResult);
+      Log.p('{network_connect_monitor.dart} changed: ${result.toString()}');
+      onChange(result);
+    });
   }
 
   Future<bool> dataConnection() async {
@@ -55,11 +75,6 @@ abstract class NetworkConnectionMonitorStream extends BroadcastStream<NetworkCon
         return NetworkConnectionType.WiFi;
     }
     throw Exception('Unknown status ${status.toString()}');
-  }
-
-  void onChange(NetworkConnectionType result) async {
-    await onConnectioned();
-    sink.add(result);
   }
 
   Future<void> onConnectioned() async {

@@ -1,15 +1,13 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:connection_package/bloc/connection_bloc.dart';
 import 'package:connection_package/connection_package.dart';
-import 'package:connection_package/network/network_status.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_project_package/hud/hud_scaffold.dart';
-import 'package:flutter_project_package/mode_themes/mode_color.dart';
-import 'package:flutter_project_package/mode_themes/mode_theme.dart';
-import 'package:flutter_project_package/tracers/tracers.dart' as Log;
+import 'package:hud_scaffold/hud_scaffold.dart';
+import 'package:mode_theme/mode_theme.dart';
+import 'package:tracers/tracers.dart' as Log;
 
 void main() => runApp(ZerkyApp());
+
+class NetworkConnectionMonitor extends NetworkConnectionMonitorStream {}
 
 class ZerkyApp extends StatelessWidget {
   @override
@@ -32,7 +30,7 @@ class ZerkyApp extends StatelessWidget {
   }
 }
 
-///-------------------------------------------------------------------------------------
+//MARK:
 class Zerky extends StatefulWidget {
   const Zerky({Key key}) : super(key: key);
   static const route = '/zerky';
@@ -41,11 +39,12 @@ class Zerky extends StatefulWidget {
   _Zerky createState() => _Zerky();
 }
 
-///-------------------------------------------------------------------------------------
+//MARK:
 class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<Zerky> {
   bool hideSpinner = true;
-  ConnectionBloc _connectionBloc;
-  LiveNetwork _liveNetwork;
+  //ConnectionBloc _connectionBloc;
+  //LiveNetwork _liveNetwork;
+  NetworkConnectionMonitor _networkConnectionMonitor = NetworkConnectionMonitor()..listen();
   String buttonText = 'null';
 
   // ignore: non_constant_identifier_names
@@ -55,8 +54,8 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _connectionBloc = ConnectionBloc();
-    _liveNetwork = LiveNetwork(connectionBloc: _connectionBloc)..listen();
+    //_connectionBloc = ConnectionBloc();
+    //_liveNetwork = LiveNetwork(connectionBloc: _connectionBloc)..listen();
 
     Log.t('zerky initState()');
   }
@@ -64,7 +63,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
   @override
   void afterFirstLayout(BuildContext context) {
     Log.t('zerky afterFirstLayout()');
-    _liveNetwork.connectionType().then((value) {
+    _networkConnectionMonitor.connectionType().then((value) {
       if (value.toString() != buttonText) {
         setState(() {
           buttonText = value.toString();
@@ -144,13 +143,16 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
   /// Scaffold body
   Widget body() {
     Log.t('zerky body()');
-    return BlocBuilder(
-      bloc: _connectionBloc,
-      builder: (context, state) {
-        if (state is ConnectedWifiState) {
+    return StreamBuilder<NetworkConnectionType>(
+      stream: _networkConnectionMonitor.stream,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return Center(child: Text('WAITING'));
+        final state = snapshot.data;
+        Log.v('state: ${state.toString()}');
+        if (state == NetworkConnectionType.WiFi) {
           return Center(child: Text('WIFI'));
         }
-        if (state is ConnectedCelluarState) {
+        if (state == NetworkConnectionType.Cellular) {
           return Center(child: Text('Celluar'));
         }
         return Center(
@@ -170,7 +172,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
               RaisedButton(
                 child: Text('$buttonText', style: Theme.of(context).textTheme.headline5),
                 onPressed: () {
-                  _liveNetwork.connectionType().then((value) {
+                  _networkConnectionMonitor.connectionType().then((value) {
                     if (value.toString() != buttonText) {
                       setState(() {
                         buttonText = value.toString();

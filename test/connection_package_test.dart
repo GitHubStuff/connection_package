@@ -1,63 +1,40 @@
-import 'package:connection_package/bloc/connection_bloc.dart';
-import 'package:connection_package/bloc/connection_state.dart';
 import 'package:connection_package/connection_package.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:connection_package/network/network_status.dart';
-
-class MockNetwork extends Mock implements LiveNetwork {
-  MockNetwork(ConnectionBloc bloc) : super();
-}
+class MockNetwork extends Mock implements NetworkConnectionMonitorStream {}
 
 void main() {
   MockNetwork mockNetwork;
-  ConnectionBloc connectionBloc;
 
   setUp(() {
-    connectionBloc = ConnectionBloc();
-    mockNetwork = MockNetwork(connectionBloc);
+    mockNetwork = MockNetwork()..listen();
   });
 
   tearDown(() {
     mockNetwork.close();
   });
 
-  test('initial state is correct', () {
-    expect(connectionBloc.initialState, ConnectionInitialState());
-  });
-
-  test('close does not emit new states', () {
-    expectLater(
-      connectionBloc,
-      emitsInOrder([ConnectionInitialState(), emitsDone]),
-    );
-    connectionBloc.close();
-  });
-
-  test('Changed state to "wifi"', () {
-    final expectedResponse = [
-      ConnectionInitialState(),
-      ConnectedWifiState(),
-    ];
-    expectLater(
-      connectionBloc,
-      emitsInOrder(expectedResponse),
+  testWidgets('close does not emit new states', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      StreamBuilder<NetworkConnectionType>(
+          stream: mockNetwork.stream,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return Center(child: Text('WAITING'));
+            final state = snapshot.data;
+            if (state == NetworkConnectionType.WiFi) {
+              return Center(child: Text('WIFI'));
+            }
+            if (state == NetworkConnectionType.Cellular) {
+              return Center(child: Text('Celluar'));
+            }
+            return null;
+          }),
     );
 
-    connectionBloc.add(ConnectionChangedEvent(NetworkConnectionType.WiFi));
-  });
-
-  test('Network reported change to "wifi"', () async {
-    final expectedResponse = [
-      ConnectionInitialState(),
-      ConnectedWifiState(),
-    ];
-    expectLater(
-      connectionBloc,
-      emitsInOrder(expectedResponse),
-    );
-    final network = TestNetwork(connectionBloc, connectivityResult: NetworkConnectionType.WiFi);
-    network.onChange(NetworkConnectionType.WiFi);
+    await tester.pump(Duration.zero);
+    Finder widget = find.byType(Center);
+    expect(widget, findsOneWidget);
   });
 }

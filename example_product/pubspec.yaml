@@ -14,14 +14,19 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_modular: ^1.1.2
-  
-  flutter_project_package:
-    git:
-      url: https://github.com/GitHubStuff/flutter_project_package.git
   equatable: ^1.1.1
   flutter_bloc: ^4.0.0
   connection_package:
     path: '../'
+  mode_theme:
+    git:
+      url: https://github.com/GitHubStuff/mode_theme.git
+  tracers:
+    git:
+      url: https://github.com/GitHubStuff/tracers.git
+  hud_scaffold:
+    git:
+      url: https://github.com/GitHubStuff/hud_scaffold.git
 
 dev_dependencies:
   flutter_test:
