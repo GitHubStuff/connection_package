@@ -12,11 +12,19 @@ The NetworkStatus the BLoC of ConnectionBloc and any time state changes[the even
 ### Example
 
 <pre>
+
+enum NetworkConnectionType {
+  Cellular,
+  Internet,
+  None,
+  WiFi,
+}
+
 _connectionBloc = ConnectionBloc();
 _liveNetwork = LiveNetwork(connectionBloc: _connectionBloc)..listen();
 
 // Current status
-_liveNetwork.connectionType().then((value) {
+_liveNetwork.connectionType().then((NetworkConnectionType value) {
       if (value.toString() != buttonText) {
         setState(() {
           buttonText = value.toString();
