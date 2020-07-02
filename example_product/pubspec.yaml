@@ -1,11 +1,11 @@
 name: example_product
-description: A new Flutter project.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+description: Listens for changes in network connection
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+2
+version: 1.0.0+4
 
 environment:
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   after_layout: ^1.0.7+2
@@ -14,15 +14,20 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_modular: ^1.1.2
-  
-  flutter_project_package:
-    git:
-      url: https://github.com/GitHubStuff/flutter_project_package.git
-  equatable: ^1.1.1
-  flutter_bloc: ^4.0.0
+  equatable: ^1.2.0
+  flutter_bloc: ^5.0.0
   connection_package:
-    path: '../'
-
+    path: "../"
+  #
+  hud_scaffold:
+    git:
+      url: https://github.com/GitHubStuff/hud_scaffold.git
+  mode_theme:
+    git:
+      url: https://github.com/GitHubStuff/mode_theme.git
+  tracers:
+    git:
+      url: https://github.com/GitHubStuff/tracers.git
 dev_dependencies:
   flutter_test:
     sdk: flutter

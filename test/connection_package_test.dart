@@ -15,16 +15,12 @@ void main() {
   ConnectionBloc connectionBloc;
 
   setUp(() {
-    connectionBloc = ConnectionBloc();
+    connectionBloc = ConnectionBloc(ConnectionInitialState());
     mockNetwork = MockNetwork(connectionBloc);
   });
 
   tearDown(() {
     mockNetwork.close();
-  });
-
-  test('initial state is correct', () {
-    expect(connectionBloc.initialState, ConnectionInitialState());
   });
 
   test('close does not emit new states', () {

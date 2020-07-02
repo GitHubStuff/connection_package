@@ -1,15 +1,15 @@
 name: connection_package
-description: A new Flutter package project.
-version: 0.0.4+1
+description: Tracks changes in network connectivity
+version: 0.0.5+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  equatable: ^1.1.1
-  flutter_bloc: ^4.0.0
+  equatable: ^1.2.0
+  flutter_bloc: ^5.0.0
   # Beyond Bloc
   app_exception:
     git:

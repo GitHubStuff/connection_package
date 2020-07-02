@@ -3,8 +3,7 @@ import 'package:bloc/bloc.dart';
 import '../connection_package.dart';
 
 class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
-  @override
-  ConnectionState get initialState => ConnectionInitialState();
+  ConnectionBloc(ConnectionState initialState) : super(initialState);
 
   @override
   Stream<ConnectionState> mapEventToState(dynamic event) async* {

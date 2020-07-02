@@ -22,13 +22,13 @@ abstract class NetworkStatus {
 
   Future<NetworkConnectionType> connectionType() async {
     final status = await (Connectivity().checkConnectivity());
-    Log.t('{network_status.dart} connectionType {status: $status}');
+    Log.p('{network_status.dart} connectionType {status: $status}');
     return _mapToAppNetworkStatus(status);
   }
 
   Future<bool> dataConnection({bool mock}) async {
     final connection = mock ?? await DataConnectionChecker().hasConnection;
-    Log.t('{network_status.dart} dataConnection {connection: $connection}');
+    Log.p('{network_status.dart} dataConnection {connection: $connection}');
     return connection;
   }
 

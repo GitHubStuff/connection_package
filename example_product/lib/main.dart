@@ -4,10 +4,9 @@ import 'package:connection_package/connection_package.dart';
 import 'package:connection_package/network/network_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_project_package/hud/hud_scaffold.dart';
-import 'package:flutter_project_package/mode_themes/mode_color.dart';
-import 'package:flutter_project_package/mode_themes/mode_theme.dart';
-import 'package:flutter_project_package/tracers/tracers.dart' as Log;
+import 'package:hud_scaffold/hud_scaffold.dart';
+import 'package:mode_theme/mode_theme.dart';
+import 'package:tracers/tracers.dart' as Log;
 
 void main() => runApp(ZerkyApp());
 
@@ -55,7 +54,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _connectionBloc = ConnectionBloc();
+    _connectionBloc = ConnectionBloc(ConnectionInitialState());
     _liveNetwork = LiveNetwork(connectionBloc: _connectionBloc)..listen();
 
     Log.t('zerky initState()');
