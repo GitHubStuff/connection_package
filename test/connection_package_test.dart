@@ -1,4 +1,5 @@
 import 'package:connection_package/bloc/connection_bloc.dart';
+import 'package:connection_package/bloc/connection_event.dart';
 import 'package:connection_package/bloc/connection_state.dart';
 import 'package:connection_package/connection_package.dart';
 import 'package:flutter_test/flutter_test.dart';

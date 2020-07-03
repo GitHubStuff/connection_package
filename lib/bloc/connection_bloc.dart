@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import '../connection_package.dart';
+import 'connection_event.dart';
+import 'connection_state.dart';
 
 class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
   ConnectionBloc(ConnectionState initialState) : super(initialState);
@@ -18,6 +20,9 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
     switch (connectivityState) {
       case NetworkConnectionType.Cellular:
         yield ConnectedCelluarState();
+        break;
+      case NetworkConnectionType.Internet:
+        yield ConnectedWifiState();
         break;
       case NetworkConnectionType.None:
         yield NoConnectionState();

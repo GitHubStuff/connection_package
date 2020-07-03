@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:connection_package/bloc/connection_bloc.dart';
+import 'package:connection_package/bloc/connection_event.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';

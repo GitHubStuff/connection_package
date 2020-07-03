@@ -20,10 +20,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: d1f1e46fc3aebe33eba2018a138834b2114100ac
+      resolved-ref: "9b4d40e5a7ccb722f29453c7874ed714632cc283"
       url: "https://github.com/GitHubStuff/app_exception.git"
     source: git
-    version: "0.0.4+1"
+    version: "0.0.5+0"
   archive:
     dependency: transitive
     description:
@@ -483,10 +483,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "6e87420f5f443fa6feb7710d3c6b261d24746a1b"
+      resolved-ref: b70688c0cbe31434c8dfb49160ac614d766a6925
       url: "https://github.com/GitHubStuff/tracers.git"
     source: git
-    version: "0.10.0+1"
+    version: "0.11.0+0"
   typed_data:
     dependency: transitive
     description:
