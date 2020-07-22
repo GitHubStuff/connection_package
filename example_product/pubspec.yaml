@@ -2,7 +2,7 @@ name: example_product
 description: Listens for changes in network connection
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+4
+version: 1.0.0+5
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
   flutter_modular: ^1.1.2
   equatable: ^1.2.0
-  flutter_bloc: ^6.0.0
+  flutter_bloc: ^6.0.1
   connection_package:
     path: "../"
   #
