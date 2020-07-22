@@ -144,7 +144,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
   Widget body() {
     Log.t('zerky body()');
     return BlocBuilder(
-      bloc: _connectionBloc,
+      cubit: _connectionBloc,
       builder: (context, state) {
         if (state is ConnectedWifiState) {
           return Center(child: Text('WIFI'));
