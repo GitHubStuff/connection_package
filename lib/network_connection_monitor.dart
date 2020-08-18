@@ -23,7 +23,7 @@ abstract class BroadcastStream<T> {
 
 abstract class NetworkConnectionMonitorStream extends BroadcastStream<NetworkConnectionType> {
   NetworkConnectionMonitorStream() {
-    //iOS doesn't get an initial network status, so this wil "force poll" to get connection state
+    //iOS doesn't get an initial network status, so this will "force poll" to get connection state
     connectionType().then((networkConnectionType) {
       onChange(networkConnectionType);
     });
