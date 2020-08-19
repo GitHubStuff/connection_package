@@ -15,15 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.39.17"
-  app_exception:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "9b4d40e5a7ccb722f29453c7874ed714632cc283"
-      url: "https://github.com/GitHubStuff/app_exception.git"
-    source: git
-    version: "0.0.5+0"
   args:
     dependency: transitive
     description:
@@ -221,13 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.4"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.16.1"
   io:
     dependency: transitive
     description:
@@ -457,15 +441,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.10"
-  tracers:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "7432b11d7814a436a941c03f5302c3a6947d18f3"
-      url: "https://github.com/GitHubStuff/tracers.git"
-    source: git
-    version: "0.11.0+2"
   typed_data:
     dependency: transitive
     description:

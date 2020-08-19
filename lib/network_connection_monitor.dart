@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:connection_package/connection_package.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:tracers/tracers.dart' as Log;
 
 /// Defines a class for a StreamController, that will have take care of
 /// implementation details like access to the stream, and sink.
@@ -35,7 +34,6 @@ abstract class NetworkConnectionMonitorStream extends BroadcastStream<NetworkCon
 
   Future<NetworkConnectionType> connectionType() async {
     final status = await (Connectivity().checkConnectivity());
-    Log.p('{network_status.dart} connectionType {status: $status}');
     return _convertConnectivityToNetworkConnectionType(status);
   }
 
@@ -51,17 +49,14 @@ abstract class NetworkConnectionMonitorStream extends BroadcastStream<NetworkCon
 
   void listen() {
     if (_subscription != null) return;
-    Log.p('{network_connect_monitor.dart} ..Listening');
     _subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult connectivityResult) {
       final result = _convertConnectivityToNetworkConnectionType(connectivityResult);
-      Log.p('{network_connect_monitor.dart} changed: ${result.toString()}');
       onChange(result);
     });
   }
 
   Future<bool> dataConnection() async {
     final connection = await DataConnectionChecker().hasConnection;
-    Log.p('{network_status.dart} dataConnection {connection: $connection}');
     return connection;
   }
 

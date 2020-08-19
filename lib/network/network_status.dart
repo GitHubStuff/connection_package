@@ -5,7 +5,6 @@ import 'package:connection_package/bloc/connection_event.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter/material.dart';
-import 'package:tracers/tracers.dart' as Log;
 
 import '../bloc/connection_bloc.dart';
 import '../connection_package.dart';
@@ -23,13 +22,11 @@ abstract class NetworkStatus {
 
   Future<NetworkConnectionType> connectionType() async {
     final status = await (Connectivity().checkConnectivity());
-    Log.p('{network_status.dart} connectionType {status: $status}');
     return _mapToAppNetworkStatus(status);
   }
 
   Future<bool> dataConnection({bool mock}) async {
     final connection = mock ?? await DataConnectionChecker().hasConnection;
-    Log.p('{network_status.dart} dataConnection {connection: $connection}');
     return connection;
   }
 
