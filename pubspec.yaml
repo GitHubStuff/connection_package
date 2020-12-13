@@ -8,8 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  equatable: ^1.2.0
-  flutter_bloc: ^6.0.1
+  equatable: ^1.2.5
+  flutter_bloc: ^6.1.0
   # Beyond Bloc
 
   connectivity: ">=0.4.8+6 <2.0.0"

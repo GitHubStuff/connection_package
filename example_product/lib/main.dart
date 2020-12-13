@@ -1,3 +1,7 @@
+// Copyright 2020 LTMM. All rights reserved.
+// Uses of this source code is governed by 'The Unlicense' that can be
+// found in the LICENSE file.
+
 import 'package:after_layout/after_layout.dart';
 import 'package:connection_package/bloc/connection_bloc.dart';
 import 'package:connection_package/bloc/connection_state.dart';
@@ -43,6 +47,7 @@ class Zerky extends StatefulWidget {
 ///-------------------------------------------------------------------------------------
 class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<Zerky> {
   bool hideSpinner = true;
+  // ignore: close_sinks
   ConnectionBloc _connectionBloc;
   LiveNetwork _liveNetwork;
   String buttonText = 'null';

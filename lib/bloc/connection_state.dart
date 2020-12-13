@@ -1,4 +1,6 @@
-//part of 'connection_bloc.dart';
+// Copyright 2020 LTMM. All rights reserved.
+// Uses of this source code is governed by 'The Unlicense' that can be
+// found in the LICENSE file.
 
 import 'package:equatable/equatable.dart';
 

@@ -1,3 +1,7 @@
+// Copyright 2020 LTMM. All rights reserved.
+// Uses of this source code is governed by 'The Unlicense' that can be
+// found in the LICENSE file.
+
 import 'dart:async';
 
 import 'package:connection_package/connection_package.dart';
@@ -10,6 +14,7 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 /// to call 'close()' to close the stream in the Widget class's 'void dispose()'
 ///
 abstract class BroadcastStream<T> {
+  // ignore: cancel_subscriptions
   StreamSubscription<ConnectivityResult> _subscription;
   final StreamController<T> _streamController = StreamController<T>.broadcast();
   Stream<T> get stream => _streamController.stream;
