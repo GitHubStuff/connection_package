@@ -3,7 +3,9 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+
 import '../connection_package.dart';
 import 'connection_event.dart';
 import 'connection_state.dart';
