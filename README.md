@@ -47,7 +47,7 @@ return BlocBuilder(
 
 ```
 
-<b>The *..listen()* is what starts the listener</b>
+**The *..listen()* is what starts the listener**
 
 ## Conclusion
 
