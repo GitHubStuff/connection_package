@@ -162,7 +162,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('Zerky Template', style: Theme.of(context).textTheme.headline5),
-              RaisedButton(
+              ElevatedButton(
                 child: Text(
                   'Toggle Mode',
                   style: TextStyle(fontSize: 32.0),
@@ -171,7 +171,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
                   ModeTheme.of(context).toggleBrightness();
                 },
               ),
-              RaisedButton(
+              ElevatedButton(
                 child: Text('$buttonText', style: Theme.of(context).textTheme.headline5),
                 onPressed: () {
                   _liveNetwork.connectionType().then((value) {
@@ -182,7 +182,7 @@ class _Zerky extends State<Zerky> with WidgetsBindingObserver, AfterLayoutMixin<
                     }
                   });
                   final bar = _message(context, buttonText);
-                  Scaffold.of(context).showSnackBar(bar);
+                  ScaffoldMessenger.of(context).showSnackBar(bar);
 
                   /// Navigator.push(context, MaterialPageRoute(builder: (context) => Berky()));
                 },
